@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+<div class="screenshot-block"></div>
 <div class="container">
     <div class="header">
         <h1>Nikolai Malchikov</h1>
@@ -94,5 +95,43 @@
     <p><strong>Moscow State Open University</strong></p>
     <p>Bachelor of Engineering in Computer Science – 2020</p>
 </div>
+<script>
+    // Отключение правого клика
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+    });
+
+    // Отключение клавиш F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener("keydown", function (e) {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+            (e.ctrlKey && e.key === "U")
+        ) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "PrintScreen") {
+            navigator.clipboard.writeText("");
+            alert("Screenshots are disabled!");
+            e.preventDefault();
+        }
+    });
+    document.addEventListener("keyup", function (e) {
+        if (e.key === "PrintScreen") {
+            navigator.clipboard.writeText("");
+        }
+    });
+    setInterval(function() {
+        let bannedApps = ["SnippingTool.exe", "Lightshot.exe", "ShareX.exe"];
+        for (let app of bannedApps) {
+            if (navigator.userAgent.includes(app)) {
+                alert("Screenshot tools are not allowed!");
+                window.close();
+            }
+        }
+    }, 3000);
+</script>
 </body>
 </html>
