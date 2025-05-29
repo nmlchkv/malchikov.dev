@@ -20,6 +20,11 @@ class UrlService
 
     public function validateUrl(array $data): array
     {
+        if (empty($data['url']['name'])) {
+            throw ValidationException::withMessages([
+                'url.name' => 'The URL field is required.'
+            ]);
+        }
         $data['url']['name'] = $this->ensureScheme($data['url']['name']);
 
         $validator = Validator::make($data, self::URL_VALIDATION_RULES);
