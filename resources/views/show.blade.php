@@ -11,16 +11,16 @@
                     <td>{{ $url->id }}</td>
                 </tr>
                 <tr>
-                    <td>Имя</td>
+                    <td>Name</td>
                     <td>{{ $url->name }}</td>
                 </tr>
                 <tr>
-                    <td>Дата создания</td>
+                    <td>Created at</td>
                     <td>{{ $url->created_at }}</td>
                 </tr>
             </table>
         </div>
-        <h2 class="mt-5 mb-3">Проверки</h2>
+        <h2 class="mt-5 mb-3">Checks</h2>
         <form method="post" action="{{ route('urls.checks.store', [$url->id]) }}">
             @csrf
             <input type="submit" class="btn btn-primary" value="Run analysis">
@@ -32,7 +32,7 @@
                 <th>h1</th>
                 <th>title</th>
                 <th>description</th>
-                <th>Date of Creation</th>
+                <th>Created at</th>
             </tr>
             @foreach($checks as $check)
                 <tr>
