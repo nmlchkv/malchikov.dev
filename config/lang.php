@@ -3,8 +3,8 @@
 return [
     'en' => [
         'title' => 'Welcome!',
-        'desc' => 'Choose where you want to go:',
         'bio' => 'My name is Nikolay, and I am a developer.',
+        'desc' => 'Choose where you want to go:',
         'cv' => 'Resume',
         'project' => 'Project',
         'linkedin' => 'LinkedIn Profile',
@@ -13,8 +13,8 @@ return [
     ],
     'ru' => [
         'title' => 'Добро пожаловать!',
-        'desc' => 'Выберите, куда хотите перейти:',
         'bio' => 'Меня зовут Николай, и я разработчик.',
+        'desc' => 'Выберите, куда хотите перейти:',
         'cv' => 'Резюме',
         'project' => 'Проект',
         'linkedin' => 'Профиль LinkedIn',
@@ -23,8 +23,8 @@ return [
     ],
     'es' => [
         'title' => '¡Bienvenido!',
-        'desc' => 'Elige a dónde quieres ir:',
         'bio' => 'Me llamo Nikolay y soy desarrollador.',
+        'desc' => 'Elige a dónde quieres ir:',
         'cv' => 'Currículum',
         'project' => 'Proyecto',
         'linkedin' => 'Perfil de LinkedIn',

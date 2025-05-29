@@ -36,17 +36,18 @@ class UrlService
         return rtrim(mb_strtolower(trim($this->ensureScheme($url))), '/');
     }
 
-    public function findUrl(string $normalizedUrl)
+    public function findUrl(string $url)
     {
-        return DB::table('urls')
-            ->where('name', $normalizedUrl)
-            ->first();
+        $canonical = $this->canonicalUrl($url);
+        return DB::table('urls')->where('name', $canonical)->first();
     }
 
-    public function createUrl(string $normalizedUrl): int
+    public function createUrl(string $url, $userId = null): int
     {
+        $canonical = $this->canonicalUrl($url);
         return DB::table('urls')->insertGetId([
-            'name' => $normalizedUrl,
+            'name' => $canonical,
+            'user_id' => $userId,
             'created_at' => now()
         ]);
     }
@@ -61,9 +62,10 @@ class UrlService
             ->orderBy('created_at', 'desc')
             ->paginate(self::PAGINATION_COUNT);
     }
-    public function getUrlsWithChecks()
+    public function getUrlsWithChecks($userId)
     {
         $urls = DB::table('urls')
+            ->where('user_id', $userId)
             ->orderBy('id')
             ->paginate(15);
 
@@ -80,6 +82,44 @@ class UrlService
     }
     public function ensureScheme(string $url): string
     {
-        return Str::startsWith($url, self::URL_SCHEMES) ? $url : self::DEFAULT_SCHEME . $url;
+        foreach (self::URL_SCHEMES as $scheme) {
+            if (Str::startsWith(mb_strtolower($url), $scheme)) {
+                return $url;
+            }
+        }
+        return self::DEFAULT_SCHEME . $url;
+    }
+    public function canonicalUrl(string $url): string
+    {
+        $url = trim(mb_strtolower($url));
+        $url = preg_replace('/^https?:\/\//', '', $url);
+        $url = rtrim($url, '/');
+        $url = preg_replace('/^www\./', '', $url);
+        $url = 'www.' . $url;
+        return $url;
+    }
+    public function findOrCreateUrl(string $url, $userId, &$wasCreated = null): int
+    {
+        $canonical = $this->canonicalUrl($url);
+
+        if (is_null($userId)) {
+            $existingUrl = DB::table('urls')
+                ->where('name', $canonical)
+                ->whereNull('user_id')
+                ->first();
+        } else {
+            $existingUrl = DB::table('urls')
+                ->where('name', $canonical)
+                ->where('user_id', $userId)
+                ->first();
+        }
+
+        if ($existingUrl) {
+            $wasCreated = false;
+            return $existingUrl->id;
+        } else {
+            $wasCreated = true;
+            return $this->createUrl($canonical, $userId);
+        }
     }
 }
