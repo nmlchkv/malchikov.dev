@@ -24,6 +24,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('urls.index') }}">Sites</a>
                 </li>
+
+                @guest
+                    <li class="nav-item ms-md-3">
+                        <a href="{{ route('google.login') }}" class="btn btn-danger">
+                            Войти через Google
+                        </a>
+                    </li>
+                @endguest
+
+                @auth
+                    <li class="nav-item ms-md-3 d-flex align-items-center">
+                <span class="me-2 fw-bold text-light">
+                    {{ Auth::user()->name }}
+                </span>
+                        <span class="me-2 d-none d-md-inline text-light">
+                    {{ Auth::user()->email }}
+                </span>
+                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Выйти</button>
+                        </form>
+                    </li>
+                @endauth
+
             </ul>
         </div>
     </nav>
