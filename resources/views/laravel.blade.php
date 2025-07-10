@@ -19,8 +19,14 @@
                         Check
                     </button>
                 </form>
+                @error('url.name')
+                <div class="text-danger small mt-2">{{ $message }}</div>
+                @enderror
                 <p class="typing-text">
-                    Page Analyzer is a website that analyzes specified pages for SEO suitability. This is a complete website based on the Laravel framework. Here, the basic principles of building modern sites on the MVC architecture are being worked on: working with routing, request handlers, template engine, and interaction with the database.
+                    Page Analyzer is a website that analyzes specified pages for SEO suitability. This is a complete
+                    website based on the Laravel framework. Here, the basic principles of building modern sites on the
+                    MVC architecture are being worked on: working with routing, request handlers, template engine, and
+                    interaction with the database.
                 </p>
             </div>
         </div>

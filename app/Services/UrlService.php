@@ -14,7 +14,12 @@ class UrlService
 
     private const PAGINATION_COUNT = 15;
     private const URL_VALIDATION_RULES = [
-        'url.name' => 'required|url|max:255'
+        'url.name' => [
+            'required',
+            'string',
+            'max:255',
+            'regex:/^(https?:\/\/)?(www\.)?[a-z0-9\-]+(\.[a-z]{2,})+$/i'
+        ]
     ];
 
 
