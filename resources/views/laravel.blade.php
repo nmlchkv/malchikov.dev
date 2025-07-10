@@ -6,15 +6,19 @@
             <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
                 <h1 class="display-3">Page Analyzer</h1>
                 <p class="lead">Analyze websites for SEO suitability for free</p>
-                <form action="{{ route('urls.store') }}" method="post" class="row g-2">
+                <form action="{{ route('urls.store') }}" method="post" class="row gx-2 gy-2 align-items-center">
                     @csrf
                     <div class="col-12 col-md">
-                        <input type="text" name="url[name]" value="{{ old('url.name') }}"
+                        <input type="text"
+                               name="url[name]"
+                               value="{{ old('url.name') }}"
                                class="form-control form-control-lg"
                                placeholder="www.example.com">
                     </div>
                     <div class="col-12 col-md-auto">
-                        <input type="submit" class="btn btn-primary btn-lg w-100 text-uppercase" value="Check">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 text-uppercase">
+                            Check
+                        </button>
                     </div>
                 </form>
                 <p class="typing-text">
