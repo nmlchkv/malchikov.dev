@@ -6,10 +6,16 @@
             <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
                 <h1 class="display-3">Page Analyzer</h1>
                 <p class="lead">Analyze websites for SEO suitability for free</p>
-                <form action="{{ route('urls.store') }}" method="post" class="d-flex justify-content-center">
+                <form action="{{ route('urls.store') }}" method="post" class="row g-2">
                     @csrf
-                    <input type="text" name="url[name]" value="{{ old('url.name') }}" class="form-control form-control-lg" placeholder="www.example.com">
-                    <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Check">
+                    <div class="col-12 col-md">
+                        <input type="text" name="url[name]" value="{{ old('url.name') }}"
+                               class="form-control form-control-lg"
+                               placeholder="www.example.com">
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <input type="submit" class="btn btn-primary btn-lg w-100 text-uppercase" value="Check">
+                    </div>
                 </form>
                 <p class="typing-text">
                     Page Analyzer is a website that analyzes specified pages for SEO suitability. This is a complete website based on the Laravel framework. Here, the basic principles of building modern sites on the MVC architecture are being worked on: working with routing, request handlers, template engine, and interaction with the database.
