@@ -28,7 +28,7 @@
                 @guest
                     <li class="nav-item ms-md-3">
                         <a href="{{ route('google.login') }}" class="btn btn-danger">
-                            Войти через Google
+                            Sign in with Google
                         </a>
                     </li>
                 @endguest

@@ -14,15 +14,22 @@
 
     <div class="container text-center mt-5">
         <h1 class="display-4">{{ $texts['title'] }}</h1>
-        <p class="lead">{{ $texts['desc'] }}</p>
-
         <div class="mt-4">
             <p class="text-muted">{{ $texts['bio'] }}</p>
         </div>
-
+        <p class="lead">{{ $texts['desc'] }}</p>
         <div class="mt-4">
             <a href="{{ url('/cv') }}" class="btn btn-primary btn-lg m-2">{{ $texts['cv'] }}</a>
-            <a href="{{ url('/laravel') }}" class="btn btn-success btn-lg m-2">{{ $texts['project'] }}</a>
+
+            <div class="btn-group m-2">
+                <button type="button" class="btn btn-success btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ $texts['project'] }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ url('/laravel') }}">Laravel</a></li>
+                    <li><a class="dropdown-item" href="https://t.me/job_contact_finder_bot" target="_blank">Telegram Bot</a></li>
+                </ul>
+            </div>
         </div>
 
         <div class="mt-4">
