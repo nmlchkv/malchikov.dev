@@ -28,6 +28,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{ url('/laravel') }}">Laravel</a></li>
                     <li><a class="dropdown-item" href="https://t.me/job_contact_finder_bot" target="_blank">Telegram Bot</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/dividir') }}">Split the bill</a></li>
                 </ul>
             </div>
         </div>

@@ -13,6 +13,7 @@ Route::view('/', 'welcome')->name('welcome');
 Route::get('/cv', function () {
     return view('resume/resume');
 });
+Route::view('/dividir', 'dividir')->name('dividir');
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
