@@ -19,15 +19,15 @@ class UrlCheckController extends Controller
     {
         try {
             $data = $this->urlCheckService->checkUrl($url);
-            Log::info("Данные проверки:", $data);
+            Log::info("Check data:", $data);
 
             $this->urlCheckService->saveCheck($url, $data);
-            Log::info("Проверка успешно сохранена для URL ID: " . $url);
+            Log::info("Check successfully saved for URL ID: " . $url);
 
-            flash(__('Страница успешно проверена'))->success();
+            flash(__('The page has been checked successfully'))->success();
         } catch (\Exception $exception) {
-            Log::error("Ошибка при проверке URL: " . $exception->getMessage());
-            flash(__('Произошла ошибка при проверке: ') . $exception->getMessage())->error();
+            Log::error("Error while checking URL: " . $exception->getMessage());
+            flash(__('An error occurred during the check: ') . $exception->getMessage())->error();
         }
 
         return redirect()->route('urls.show', ['url' => $url]);

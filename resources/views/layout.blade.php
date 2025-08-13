@@ -10,7 +10,7 @@
 <body class="min-vh-100 d-flex flex-column">
 <header class="flex-shrink-0">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -28,7 +28,7 @@
                 @guest
                     <li class="nav-item ms-md-3">
                         <a href="{{ route('google.login') }}" class="btn btn-danger">
-                            Войти через Google
+                            Sign in with Google
                         </a>
                     </li>
                 @endguest
@@ -55,6 +55,6 @@
 <main class="flex-grow-1">
     @yield('main_content')
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

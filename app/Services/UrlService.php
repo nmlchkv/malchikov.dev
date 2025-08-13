@@ -14,7 +14,12 @@ class UrlService
 
     private const PAGINATION_COUNT = 15;
     private const URL_VALIDATION_RULES = [
-        'url.name' => 'required|url|max:255'
+        'url.name' => [
+            'required',
+            'string',
+            'max:255',
+            'regex:/^(https?:\/\/)?(www\.)?[a-z0-9\-]+(\.[a-z]{2,})+$/i'
+        ]
     ];
 
 
@@ -25,12 +30,30 @@ class UrlService
                 'url.name' => 'The URL field is required.'
             ]);
         }
+
         $data['url']['name'] = $this->ensureScheme($data['url']['name']);
 
         $validator = Validator::make($data, self::URL_VALIDATION_RULES);
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
+        }
+
+        $host = parse_url($data['url']['name'], PHP_URL_HOST);
+        if (!$host) {
+            throw ValidationException::withMessages([
+                'url.name' => 'Invalid URL format.'
+            ]);
+        }
+
+        $parts = explode('.', $host);
+        $tld = strtolower(end($parts));
+        $validTlds = config('tlds');
+
+        if (!in_array($tld, $validTlds)) {
+            throw ValidationException::withMessages([
+                'url.name' => 'Invalid or unsupported domain zone.'
+            ]);
         }
 
         return $validator->validated();

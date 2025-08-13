@@ -3,7 +3,7 @@
 return [
     'en' => [
         'title' => 'Welcome!',
-        'bio' => 'My name is Nikolay, and I am a developer.',
+        'bio' => 'My name is Nikolai, and I am a developer.',
         'desc' => 'Choose where you want to go:',
         'cv' => 'Resume',
         'project' => 'Project',

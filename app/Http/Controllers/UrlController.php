@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\UrlService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\ValidationException;
 
@@ -27,14 +26,14 @@ class UrlController extends Controller
             $id = $this->urlService->findOrCreateUrl($normalizedUrl, $userId, $wasCreated);
 
             if ($wasCreated) {
-                flash('Страница успешно добавлена')->success();
+                flash('Add')->success();
             } else {
-                flash('Страница уже существует')->warning();
+                flash('Exist')->warning();
             }
 
             return redirect()->route('urls.show', $id);
         } catch (ValidationException $e) {
-            flash('Некорректный URL')->error();
+            flash('Not correct')->error();
             return response(View::make('laravel'), 422);
         }
     }
@@ -53,7 +52,7 @@ class UrlController extends Controller
         $checks = $this->urlService->getUrlChecks($id);
 
         if (!$url) {
-            abort(404, 'URL не найден');
+            abort(404, 'URL not found');
         }
 
         return view('show', compact('url', 'checks'));
